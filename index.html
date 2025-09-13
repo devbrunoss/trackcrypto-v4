@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="landing.css">
+
+
+  <!-- SEO Básico -->
+  <title>TrackCrypto - Acompanhe Criptomoedas em Tempo Real</title>
+  <meta name="description"
+    content="TrackCrypto oferece educação simplificada e ferramentas acessíveis para iniciantes no mercado de criptomoedas. Dashboard intuitivo e conteúdo didático.">
+  <meta name="keywords"
+    content="criptomoedas, bitcoin hoje, ethereum preço, investir em cripto, como começar em criptomoedas, guia cripto iniciantes, mercado cripto, trading de criptomoedas, blockchain, educação financeira digital">
+
+  <meta name="author" content="TrackCrypto">
+
+  <!-- Open Graph (Compartilhamento em redes sociais) -->
+  <meta property="og:title" content="TrackCrypto – Acompanhe o Mercado Cripto em Tempo Real">
+  <meta property="og:description"
+    content="Dashboard premium para acompanhar preços, volume e métricas do mercado de criptomoedas.">
+  <meta property="og:image" content="https://trackcrypts.netlify.app/img/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://trackcrypts.netlify.app">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TrackCrypto – Acompanhe o Mercado Cripto em Tempo Real">
+  <meta name="twitter:description"
+    content="Dashboard premium para acompanhar preços, volume e métricas do mercado de criptomoedas.">
+  <meta name="twitter:image" content="https://trackcrypts.netlify.app/img/logo.png">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HE4QCD8ERG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HE4QCD8ERG');
+  </script>
+
+  <!-- Fontes e Estilos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="public/img/favicon.ico">
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="no-break">Seu <span class="neon-text">dashboard cripto</span></span><br>
+          <span class="no-break">simples e profissional</span>
+        </h1>
+        <h2 class="hero-subtitle">
+          De iniciantes a traders, ferramentas úteis e simples para acompanhar o mercado em tempo real.
+        </h2>
+        <a href="dashboard/index.html" class="cta-button">Acesse grátis agora</a>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-phone">
+          <div class="phone-container">
+            <div class="phone-screen">
+              <div class="dashboard-preview">
+                <div class="dashboard-header">
+                  <div class="dashboard-title">Track<span>Crypto</span></div>
+                  <div class="current-time">16:24</div>
+                </div>
+                <div class="crypto-list">
+                  <div class="crypto-item">
+                    <div class="crypto-info">
+                      <div class="crypto-icon">B</div>
+                      <div>
+                        <div class="crypto-name">Bitcoin</div>
+                        <div class="crypto-symbol">BTC</div>
+                      </div>
+                    </div>
+                    <div class="crypto-price">R$624.593,56</div>
+                    <div class="crypto-change positive">+2.3%</div>
+                  </div>
+                  <div class="crypto-item">
+                    <div class="crypto-info">
+                      <div class="crypto-icon">E</div>
+                      <div>
+                        <div class="crypto-name">Ethereum</div>
+                        <div class="crypto-symbol">ETH</div>
+                      </div>
+                    </div>
+                    <div class="crypto-price">R$24.104,02</div>
+                    <div class="crypto-change positive">+1.8%</div>
+                  </div>
+                  <div class="crypto-item">
+                    <div class="crypto-info">
+                      <div class="crypto-icon">S</div>
+                      <div>
+                        <div class="crypto-name">Solana</div>
+                        <div class="crypto-symbol">SOL</div>
+                      </div>
+                    </div>
+                    <div class="crypto-price">R$1.237,80</div>
+                    <div class="crypto-change negative">-0.4%</div>
+                  </div>
+                  <div class="crypto-item">
+                    <div class="crypto-info">
+                      <div class="crypto-icon">X</div>
+                      <div>
+                        <div class="crypto-name">XRP</div>
+                        <div class="crypto-symbol">XRP</div>
+                      </div>
+                    </div>
+                    <div class="crypto-price">R$16,47</div>
+                    <div class="crypto-change positive">+0.7%</div>
+                  </div>
+                </div>
+                <div class="dashboard-chart">
+                  <div class="chart-line"></div>
+                  <div class="chart-dots"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recursos Section -->
+  <section class="resources section-animate">
+    <div class="container">
+      <h1 class="section-title">Ferramentas <span class="neon-text">Profissionais</span></h1>
+      <p class="section-subtitle">
+        Um conjunto completo de recursos para traders e investidores que buscam precisão e confiabilidade.
+      </p>
+
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Cotações em Tempo Real</h3>
+          <p>Acompanhe as cotações das principais criptomoedas com atualizações instantâneas e precisão de
+            milissegundos.</p>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-chart-bar"></i></div>
+          <h3>Gráficos Interativos</h3>
+          <p>Analise tendências com gráficos avançados, indicadores técnicos e ferramentas de desenho profissional.</p>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-bell"></i></div>
+          <h3>Alertas Inteligentes</h3>
+          <p>Configure alertas personalizados para preços, volumes e padrões de mercado com notificações instantâneas.
+          </p>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-wallet"></i></div>
+          <h3>Gerenciador de Portfólio</h3>
+          <p>Controle todos os seus ativos em um só lugar, visualize lucros, perdas e acompanhe sua evolução no mercado.
+          </p>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-robot"></i></div>
+          <h3>Análise Automatizada</h3>
+          <p>Receba insights automáticos baseados em algoritmos que analisam padrões, tendências e movimentos de
+            mercado.</p>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-trophy"></i></div>
+          <h3>Ranking de Moedas</h3>
+          <p>Descubra quais criptomoedas mais se destacam em preço, volume e valorização com rankings atualizados em
+            tempo real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Vantagens + Estatísticas Section -->
+  <section class="advantages-stats container section-animate">
+    <div class="advantages">
+      <h1>Vantagens <span class="neon-text">Exclusivas</span></h1>
+      <ul class="advantages-list">
+        <li>Interface intuitiva e profissional</li>
+        <li>Dados em tempo real</li>
+        <li>Multiplataforma (Web, iOS, Android)</li>
+        <li>Atualizações constantes com novas funcionalidades</li>
+        <li>Suporte técnico especializado 24/7</li>
+        <li>Integração com as principais exchanges</li>
+      </ul>
+    </div>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">57</div>
+        <div class="stat-label">moedas monitoradas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="5">0</div>
+        <div class="stat-label">segundos de atualização</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="100">0</div>
+        <div class="stat-label">gratuito</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">+15</div>
+        <div class="stat-label">indicadores técnicos</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO DE DEPOIMENTOS (VERSÃO SIMPLES) ===== -->
+<section class="depoimentos-reais section-animate" style="padding: 60px 0; background: var(--bg-dark);">
+    <div class="container">
+        <!-- TÍTULO -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 2rem; margin-bottom: 10px; color: var(--text-primary);">
+                Quem usa <span style="color: var(--primary);">recomenda</span>
+            </h2>
+            <p style="color: var(--text-secondary);">Veja o que nossos investidores falam</p>
+        </div>
+
+        <!-- DEPOIMENTOS -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px;">
+            <!-- Depoimento 1 -->
+            <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.1);">
+                <p style="color: var(--text-primary); margin-bottom: 15px; line-height: 1.5;">
+                    "A seção de portfolio me ajudou demais! Agora consigo acompanhar todos meus investimentos em um só lugar."
+                </p>
+                <div style="display: flex; align-items: center; gap: 10px; border-top: 1px solid rgba(0, 255, 136, 0.1); padding-top: 15px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">
+                        M
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-primary); display: block;">Mariana Costa</strong>
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">Há 2 meses</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Depoimento 2 -->
+            <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.1);">
+                <p style="color: var(--text-primary); margin-bottom: 15px; line-height: 1.5;">
+                    "Os alertas são incríveis! Recebi no celular quando BTC chegou a R$ 290k e consegui comprar na hora certa."
+                </p>
+                <div style="display: flex; align-items: center; gap: 10px; border-top: 1px solid rgba(0, 255, 136, 0.1); padding-top: 15px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">
+                        C
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-primary); display: block;">Jefferson albuquerque</strong>
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">Há 3 meses</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Depoimento 3 -->
+            <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.1);">
+                <p style="color: var(--text-primary); margin-bottom: 15px; line-height: 1.5;">
+                    "A calculadora me salvou de fazer uma trade arriscada. Perdi apenas 2% instead de 20% do meu capital!"
+                </p>
+                <div style="display: flex; align-items: center; gap: 10px; border-top: 1px solid rgba(0, 255, 136, 0.1); padding-top: 15px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">
+                        A
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-primary); display: block;">Carla Silva</strong>
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">Há 1 mês</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTATÍSTICAS -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 400px; margin: 0 auto;">
+            <div style="text-align: center; padding: 15px; background: rgba(0, 255, 136, 0.05); border-radius: 10px; border: 1px solid rgba(0, 255, 136, 0.1);">
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">+300</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">investidores</div>
+            </div>
+            <div style="text-align: center; padding: 15px; background: rgba(0, 255, 136, 0.05); border-radius: 10px; border: 1px solid rgba(0, 255, 136, 0.1);">
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">92%</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">recomendam</div>
+            </div>
+            <div style="text-align: center; padding: 15px; background: rgba(0, 255, 136, 0.05); border-radius: 10px; border: 1px solid rgba(0, 255, 136, 0.1);">
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">4.7★</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">avaliação</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <!-- CTA Final Section -->
+  <section class="final-cta section-animate">
+    <div class="container">
+      <h2>Comece a monitorar o mercado cripto com precisão profissional</h2>
+      <a href="dashboard/index.html" class="cta-button">Acessar Dashboard Gratuito</a>
+    </div>
+  </section>
+
+  <!-- Rodapé Section -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="copyright">© 2025 TrackCrypto. Todos os direitos reservados.</div>
+        <div class="footer-links">
+          <a href="sobre.html">Sobre</a>
+          <a href="termos.html">Termos</a>
+          <a href="privacidade.html">Privacidade</a>
+          <a href="blog/index.html">Blogs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+
+  <!-- Cookie Consent Banner -->
+<div id="cookieConsent" class="cookie-consent">
+  <div class="cookie-content">
+    <div class="cookie-text">
+      <i class="fas fa-cookie-bite"></i>
+      <p>Nós usamos cookies para melhorar sua experiência, analisar tráfego e exibir anúncios personalizados. Ao usar nosso site, você concorda com nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
+    </div>
+    <div class="cookie-buttons">
+      <button id="cookieAccept" class="cookie-btn accept">Aceitar todos</button>
+      <button id="cookieSettings" class="cookie-btn settings">Personalizar</button>
+    </div>
+  </div>
+</div>
+<script>
+// Cookie Consent Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const cookieConsent = document.getElementById('cookieConsent');
+  const cookieAccept = document.getElementById('cookieAccept');
+  const cookieSettings = document.getElementById('cookieSettings');
+  
+  // Verificar se já aceitou os cookies
+  if (!getCookie('cookiesAccepted')) {
+    // Mostrar o banner após 1 segundo
+    setTimeout(() => {
+      cookieConsent.style.display = 'block';
+    }, 1000);
+  }
+  
+  // Aceitar todos os cookies
+  cookieAccept.addEventListener('click', function() {
+    setCookie('cookiesAccepted', 'true', 365);
+    setCookie('cookiesPreferences', 'all', 365);
+    cookieConsent.style.display = 'none';
+    // Aqui você pode inicializar Google Analytics, Facebook Pixel, etc.
+    initAnalytics();
+  });
+  
+  // Personalizar configurações (pode expandir depois)
+  cookieSettings.addEventListener('click', function() {
+    // Aqui você pode abrir um modal com opções específicas
+    alert('Em breve: painel de personalização de cookies!');
+  });
+});
+
+// Funções auxiliares para cookies
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/;SameSite=Lax";
+}
+
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+function initAnalytics() {
+  // Inicializar suas ferramentas de analytics aqui
+  console.log('Cookies aceitos - Analytics inicializado');
+  // Exemplo: gtag('config', 'G-HE4QCD8ERG');
+}
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicas de segurança em criptomoedas | TrackCrypto</title>
+  <meta name="description" content="Proteja seus investimentos com dicas essenciais de segurança para usar criptomoedas.">
+  <meta name="keywords" content="segurança criptomoedas, dicas segurança cripto, proteger carteira, TrackCrypto">
+
+  <meta property="og:title" content="Dicas de segurança em criptomoedas | TrackCrypto">
+  <meta property="og:description" content="Aprenda dicas práticas de segurança para manter seus investimentos em criptomoedas protegidos.">
+  <meta property="og:image" content="https://seudominio.com/blog/img/seguranca.jpg">
+  <meta property="og:type" content="article">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dicas de segurança em criptomoedas | TrackCrypto">
+  <meta name="twitter:description" content="Proteja suas criptomoedas com boas práticas de segurança.">
+  <meta name="twitter:image" content="https://seudominio.com/blog/img/seguranca.jpg">
+    <link rel="stylesheet" href="blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .security-level {
+            margin: 30px 0;
+            padding: 25px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+        }
+        
+        .level-basic {
+            border-left: 4px solid #ffc107;
+        }
+        
+        .level-advanced {
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .level-expert {
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .level-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checklist {
+            margin: 20px 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .checklist-icon {
+            color: var(--accent-green);
+            font-weight: bold;
+            margin-top: 2px;
+            min-width: 20px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 77, 77, 0.1);
+            border-left: 4px solid #ff4d4d;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .warning-title {
+            color: #ff4d4d;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .tool-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: var(--shadow);
+        }
+        
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            background-image: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .tool-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .tool-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .scam-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .scam-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+        
+        .scam-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #ff4d4d;
+        }
+        
+        .recovery-steps {
+            background: rgba(0, 204, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .steps-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+        
+        .security-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+        
+        .badge-basic {
+            background: rgba(255, 193, 7, 0.15);
+            color: #ffc107;
+        }
+        
+        .badge-advanced {
+            background: rgba(0, 204, 255, 0.15);
+            color: var(--accent-blue);
+        }
+        
+        .badge-expert {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--accent-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="blog-header">
+            <h1 class="blog-title">Track<span>Crypto</span> Blog</h1>
+            <p class="blog-subtitle">Análises, tendências e insights sobre o universo cripto</p>
+        </header>
+
+        <nav class="blog-nav">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../dashboard/index.html" class="nav-link">Dashboard</a>
+            <a href="index.html" class="nav-link active">Blog</a>
+        </nav>
+
+        <article class="post-content">
+            <header class="post-header">
+                <h1 class="post-title">Dicas de Segurança Cripto: Proteja Seus Ativos Digitais</h1>
+                <p class="post-meta">Publicado em 30 de Março de 2025 por Carla Santos - Especialista em Cybersecurity</p>
+            </header>
+
+            <p>A segurança no universo cripto é não negociável. Com o aumento de ataques e golpes sofisticados, proteger seus ativos digitais requer conhecimento, ferramentas adequadas e práticas consistentes. Esta guia abrangente cobre desde medidas básicas até técnicas avançadas de segurança.</p>
+
+            <div class="warning-box">
+                <div class="warning-title">
+                    <span>⚠️</span> AVISO CRÍTICO
+                </div>
+                <p>Se você perdeu acesso às suas chaves privadas ou foi vítima de um golpe, aja imediatamente: desconecte-se da internet, entre em contato com as exchanges envolvidas e considere consultar um especialista em segurança cripto.</p>
+            </div>
+
+            <h2>Segurança Básica <span class="security-badge badge-basic">Essencial</span></h2>
+            
+            <div class="security-level level-basic">
+                <h3 class="level-title">🔒 Fundamentos que Todo Holder Deve Conhecer</h3>
+                
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Use Senhas Fortes</strong>: Mínimo de 16 caracteres com letras, números e símbolos</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Ative 2FA em Tudo</strong>: Autenticação em dois fatores preferencialmente com app (Google Authenticator, Authy)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Verifique URLs</strong>: Sempre confirme o endereço dos sites antes de conectar carteiras</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Backup de Seed Phrases</strong>: Armazene offline em múltiplos locais seguros</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Use Email Dedicado</strong>: Email separado apenas para contas cripto</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Segurança Avançada <span class="security-badge badge-advanced">Recomendado</span></h2>
+            
+            <div class="security-level level-advanced">
+                <h3 class="level-title">🛡️ Proteção para Investidores Experientes</h3>
+                
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Hardware Wallet</strong>: Use Ledger, Trezor ou Coldcard para quantias significativas</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Carteira Multisig</strong>: Configure assinaturas múltiplas para proteção adicional</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>VPN Always On</strong>: Use VPN confiável para todas transações cripto</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Computador Dedicado</strong>: Máquina separada apenas para operações cripto</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Whitelist de Endereços</strong>: Configure lista de endereços confiáveis nas exchanges</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Segurança Expert <span class="security-badge badge-expert">Para Whales</span></h2>
+            
+            <div class="security-level level-expert">
+                <h3 class="level-title">🔐 Nível Institucional</h3>
+                
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Air-Gapped Devices</strong>: Dispositivos nunca conectados à internet</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Shamir's Secret Sharing</strong>: Divida seed phrases usando esquemas avançados</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Geographic Distribution</strong>: Armazene backups em localizações físicas diferentes</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Multi-Jurisdictional</strong>: Diversifique entre diferentes jurisdições legais</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">✓</span>
+                        <span><strong>Heritage Planning</strong>: Plano de sucessão para seus ativos digitais</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Ferramentas de Segurança Recomendadas</h2>
+            
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🔐</div>
+                    <h3 class="tool-title">Hardware Wallets</h3>
+                    <p class="tool-description">Ledger Nano X/S, Trezor Model T, Coldcard MK4 - Armazenamento offline com segurança máxima.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🛡️</div>
+                    <h3 class="tool-title">Password Managers</h3>
+                    <p class="tool-description">Bitwarden, 1Password - Gerenciadores de senhas com autofill seguro e geração de senhas complexas.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">📱</div>
+                    <h3 class="tool-title">2FA Applications</h3>
+                    <p class="tool-description">Authy, Google Authenticator, Yubico Authenticator - Autenticação em dois fatores sem SMS.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🌐</div>
+                    <h3 class="tool-title">VPN Services</h3>
+                    <p class="tool-description">Mullvad, ProtonVPN, IVPN - Conexões criptografadas e proteção de privacidade.</p>
+                </div>
+            </div>
+
+            <h2>Golpes Mais Comuns e Como Evitá-los</h2>
+            
+            <div class="scam-types">
+                <div class="scam-card">
+                    <h3 class="scam-title">Phishing Attacks</h3>
+                    <p>Sites falsos que imitam exchanges ou wallets legítimas. Sempre verifique a URL e use bookmarks.</p>
+                </div>
+                
+                <div class="scam-card">
+                    <h3 class="scam-title">Fake Support</h3>
+                    <p>Scammers se passando por suporte técnico. Lembre: suporte legítimo nunca pede suas seed phrases.</p>
+                </div>
+                
+                <div class="scam-card">
+                    <h3 class="scam-title">Giveaway Scams</h3>
+                    <p>"Envie X receba 2X" - Ninguém está dando dinheiro de graça. Desconfie de ofertas irrealistas.</p>
+                </div>
+                
+                <div class="scam-card">
+                    <h3 class="scam-title">Malware & Keyloggers</h3>
+                    <p>Software malicioso que captura suas teclas. Use antivírus e não baixe arquivos suspeitos.</p>
+                </div>
+            </div>
+
+            <h2>O Que Fazer Se Você Foi Hackeado</h2>
+            
+            <div class="recovery-steps">
+                <h3 class="steps-title">🆘 Plano de Ação de Emergência</h3>
+                
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <span class="checklist-icon">1</span>
+                        <span><strong>Desconecte-se Imediatamente</strong>: Desligue internet e desabilite Wi-Fi</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">2</span>
+                        <span><strong>Isole Dispositivos Comprometidos</strong>: Não use até verificação completa</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">3</span>
+                        <span><strong>Contate Exchanges</strong>: Alerte todas as exchanges onde você tem conta</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">4</span>
+                        <span><strong>Transfira Fundos</strong>: Mova ativos restantes para novas carteiras seguras</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">5</span>
+                        <span><strong>Documente Tudo</strong>: Registre detalhes para possível ação legal</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">6</span>
+                        <span><strong>Reinstale Sistema</strong>: Formate dispositivos e reinstale tudo do zero</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Checklist de Segurança Mensal</h2>
+            <p>Mantenha sua segurança em dia com esta rotina mensal:</p>
+            
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Atualize todos os softwares e extensões de navegador</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Verifique transações não autorizadas em todas as contas</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Teste seus backups de seed phrases (em ambiente seguro)</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Revise permissões de contratos conectados às suas carteiras</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Atualize whitelists de endereços nas exchanges</span>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">
+                    <span>⚠️</span> LEMBRETE IMPORTANTE
+                </div>
+                <p>Sua segurança é sua responsabilidade. Exchanges e serviços podem sofrer breaches, mas suas chaves privadas devem permanecer seguras. Not your keys, not your crypto.</p>
+            </div>
+
+            <div class="cta">
+                <p>Monitore suas carteiras e receba alertas de segurança em tempo real</p>
+                <a href="../dashboard/index.html" class="cta-button">Acessar Dashboard de Segurança</a>
+            </div>
+        </article>
+
+        <footer class="blog-footer">
+            <div class="crypto-ticker">
+                <div class="ticker-item">Segurança</div>
+                <div class="ticker-item">Privacidade</div>
+                <div class="ticker-item">TrackCrypto</div>
+            </div>
+            <p>TrackCrypto © 2025 - Todos os direitos reservados</p>
+        </footer>
+    </div>
+</body>
+</html>

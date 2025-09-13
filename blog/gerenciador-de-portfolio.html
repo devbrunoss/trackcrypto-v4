@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de portfólio cripto | TrackCrypto</title>
+    <meta name="description"
+        content="Organize e acompanhe seu portfólio de criptomoedas de forma simples e profissional com a TrackCrypto.">
+    <meta name="keywords" content="gerenciador portfólio cripto, carteira cripto, TrackCrypto">
+
+    <meta property="og:title" content="Gerenciador de portfólio cripto | TrackCrypto">
+    <meta property="og:description"
+        content="Acompanhe e organize seu portfólio de criptomoedas com o dashboard TrackCrypto.">
+    <meta property="og:image" content="https://seudominio.com/blog/img/portfolio.jpg">
+    <meta property="og:type" content="article">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gerenciador de portfólio cripto | TrackCrypto">
+    <meta name="twitter:description" content="Gerencie sua carteira de criptomoedas de forma fácil e eficiente.">
+    <meta name="twitter:image" content="https://seudominio.com/blog/img/portfolio.jpg">
+
+    <link rel="stylesheet" href="blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .strategy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .strategy-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: var(--shadow);
+        }
+
+        .strategy-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            background-image: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .strategy-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .strategy-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background-image: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .tool-feature {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid var(--card-border);
+        }
+
+        .tool-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .checklist {
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        .checklist-icon {
+            color: var(--accent-green);
+            font-weight: bold;
+            margin-top: 2px;
+            min-width: 20px;
+        }
+
+        .allocation-example {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid var(--card-border);
+        }
+
+        .allocation-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .allocation-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .allocation-item:last-child {
+            border-bottom: none;
+        }
+
+        .allocation-name {
+            color: var(--text-primary);
+        }
+
+        .allocation-percentage {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .best-practices {
+            background: rgba(0, 255, 136, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .practices-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="blog-header">
+            <h1 class="blog-title">Track<span>Crypto</span> Blog</h1>
+            <p class="blog-subtitle">Análises, tendências e insights sobre o universo cripto</p>
+        </header>
+
+        <nav class="blog-nav">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../dashboard/index.html" class="nav-link">Dashboard</a>
+            <a href="index.html" class="nav-link active">Blog</a>
+        </nav>
+
+        <article class="post-content">
+            <header class="post-header">
+                <h1 class="post-title">Gerenciador de Portfolio: Estratégias para Investidores Cripto</h1>
+                <p class="post-meta">Publicado em 28 de Março de 2025 por Marco Silva - Especialista em Gestão de Risco
+                </p>
+            </header>
+
+            <p>Um gerenciador de portfolio eficiente é essencial para qualquer investidor em criptomoedas. Com a
+                volatilidade característica desse mercado, estratégias sólidas de gestão podem fazer a diferença entre
+                sucesso e fracasso a longo prazo.</p>
+
+            <h2>Por que Gerenciar Seu Portfolio Cripto?</h2>
+            <p>A gestão profissional de portfolio vai muito além de simplesmente comprar e vender ativos. Envolve:</p>
+
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Diversificação inteligente entre diferentes classes de ativos</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Controle de risco e definição de tolerância pessoal</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Rebalanceamento periódico baseado em metas e market conditions</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Monitoramento de performance e métricas-chave</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Otimização fiscal e planejamento tributário</span>
+                </div>
+            </div>
+
+            <h2>Métricas Essenciais para Monitorar</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">24.7%</div>
+                    <div class="metric-label">Retorno Anualizado</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">18.3%</div>
+                    <div class="metric-label">Volatilidade Anual</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">1.35</div>
+                    <div class="metric-label">Sharpe Ratio</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">-15.2%</div>
+                    <div class="metric-label">Max Drawdown</div>
+                </div>
+            </div>
+
+            <h2>Estratégias de Alocação de Ativos</h2>
+
+            <div class="strategy-cards">
+                <div class="strategy-card">
+                    <div class="strategy-icon">🛡️</div>
+                    <h3 class="strategy-title">Estratégia Conservadora</h3>
+                    <p class="strategy-description">Foco em Bitcoin e Ethereum (70-80%), com pequenas alocações em
+                        altcoins estabelecidas. Ideal para perfis de baixa tolerância ao risco.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-icon">⚖️</div>
+                    <h3 class="strategy-title">Estratégia Balanceada</h3>
+                    <p class="strategy-description">Diversificação entre large caps (50%), mid caps (30%) e small caps
+                        (20%). Equilíbrio entre crescimento e estabilidade.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-icon">🚀</div>
+                    <h3 class="strategy-title">Estratégia Growth</h3>
+                    <p class="strategy-description">Maior exposição a altcoins promissoras (60-70%) com Bitcoin/Ethereum
+                        como hedge. Para investidores com alta tolerância ao risco.</p>
+                </div>
+            </div>
+
+            <h2>Exemplo de Alocação Balanceada</h2>
+
+            <div class="allocation-example">
+                <h3 class="allocation-title">Portfolio Modelo 60/30/10</h3>
+
+                <div class="allocation-item">
+                    <span class="allocation-name">Bitcoin (BTC)</span>
+                    <span class="allocation-percentage">40%</span>
+                </div>
+
+                <div class="allocation-item">
+                    <span class="allocation-name">Ethereum (ETH)</span>
+                    <span class="allocation-percentage">20%</span>
+                </div>
+
+                <div class="allocation-item">
+                    <span class="allocation-name">Large Cap Altcoins</span>
+                    <span class="allocation-percentage">20%</span>
+                </div>
+
+                <div class="allocation-item">
+                    <span class="allocation-name">Mid Cap Altcoins</span>
+                    <span class="allocation-percentage">10%</span>
+                </div>
+
+                <div class="allocation-item">
+                    <span class="allocation-name">Small Cap/DeFi</span>
+                    <span class="allocation-percentage">10%</span>
+                </div>
+            </div>
+
+            <h2>Ferramentas do Gerenciador TrackCrypto</h2>
+
+            <div class="tool-feature">
+                <h3 class="tool-title">📊 Dashboard em Tempo Real</h3>
+                <p>Monitoramento instantâneo de preços, valuation e performance de todos os seus ativos em uma interface
+                    unificada.</p>
+            </div>
+
+            <div class="tool-feature">
+                <h3 class="tool-title">📈 Análise de Performance</h3>
+                <p>Relatórios detalhados de retornos, comparação com benchmarks e análise de risco sofisticada.</p>
+            </div>
+
+            <div class="tool-feature">
+                <h3 class="tool-title">⚖️ Alertas de Rebalanceamento</h3>
+                <p>Notificações inteligentes quando sua alocação se desvia significativamente da estratégia definida.
+                </p>
+            </div>
+
+            <div class="tool-feature">
+                <h3 class="tool-title">📋 Relatórios Fiscais</h3>
+                <p>Geração automática de relatórios para declaração de imposto de renda e planejamento tributário.</p>
+            </div>
+
+            <div class="best-practices">
+                <h3 class="practices-title">🏆 Melhores Práticas de Gestão</h3>
+
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <span class="checklist-icon">•</span>
+                        <span>Defina claramente seus objetivos e horizonte de investimento</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">•</span>
+                        <span>Estabeleça uma tolerância ao risco realista</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">•</span>
+                        <span>Diversifique across diferentes sectores cripto (DeFi, NFTs, Gaming, Infrastructure)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">•</span>
+                        <span>Rebalanceie regularmente (trimestral ou semestralmente)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">•</span>
+                        <span>Mantenha um journal de investimentos e revise decisões passadas</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon">•</span>
+                        <span>Use stop-loss e take-profit orders para gestão de risco</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Erros Comuns a Evitar</h2>
+            <p>Alguns dos erros mais frequentes na gestão de portfolios cripto:</p>
+
+            <p>• <strong>Overconcentration</strong>: Exposição excessiva a um único ativo ou setor</p>
+            <p>• <strong>Emotional Trading</strong>: Decisões baseadas em FOMO (Fear Of Missing Out) ou medo</p>
+            <p>• <strong>Negligência Fiscal</strong>: Não acompanhar obrigações tributárias</p>
+            <p>• <strong>Falta de Rebalanceamento</strong>: Deixar a alocação desequilibrar-se com o tempo</p>
+            <p>• <strong>Timing do Mercado</strong>: Tentar prever tops e bottoms consistentemente</p>
+
+            <div class="cta">
+                <p>Experimente nosso gerenciador de portfolio profissional com todas essas funcionalidades</p>
+                <a href="../dashboard/index.html" class="cta-button">Acessar Gerenciador de Portfolio</a>
+            </div>
+        </article>
+
+        <footer class="blog-footer">
+            <div class="crypto-ticker">
+                <div class="ticker-item">BTC: $85,420 ↗</div>
+                <div class="ticker-item">ETH: $6,850 ↗</div>
+                <div class="ticker-item">TrackCrypto</div>
+            </div>
+            <p>TrackCrypto © 2025 - Todos os direitos reservados</p>
+        </footer>
+    </div>
+</body>
+
+</html>
