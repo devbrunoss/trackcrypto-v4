@@ -1130,3 +1130,22 @@ body {
     border-radius: 10px;
     border: 1px solid rgba(0, 255, 136, 0.1);
 }
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-content {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
