@@ -1729,6 +1729,7 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto 20px;
     padding: 0 20px;
 }
@@ -2575,6 +2576,7 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -7814,3 +7816,55 @@ h6 { font-size: var(--text-base); font-weight: var(--font-medium); }
         width: calc(100% - 30px);
     }
 }
+
+
+/* Garantir que no mobile ocupe 100% da tela */
+.container, .content, footer, header {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+/* Ajustar títulos e textos para não “vazar” da tela */
+h1, h2, h3, p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Melhorar espaçamento em telas menores */
+@media (max-width: 768px) {
+  .container, .content, footer {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .card, .box, .section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10px 0;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+.educacao-cripto, .educacao-cripto p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+
