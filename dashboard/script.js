@@ -909,23 +909,28 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // Função para formatar números (adicionar se não existir)
   function formatNumber(num) {
-    if (!num && num !== 0) return '--';
+  if (!num && num !== 0) return '--';
 
-    if (num >= 1000000000) {
-      return (num / 1000000000).toFixed(2) + 'B';
-    }
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(2) + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(2) + 'K';
-    }
+  const absNum = Math.abs(num);
 
-    return num.toLocaleString('pt-BR', {
-      maximumFractionDigits: 2,
-      minimumFractionDigits: 2
-    });
+  if (absNum >= 1e12) {
+    return (num / 1e12).toFixed(2) + 'T';
   }
+  if (absNum >= 1e9) {
+    return (num / 1e9).toFixed(2) + 'B';
+  }
+  if (absNum >= 1e6) {
+    return (num / 1e6).toFixed(2) + 'M';
+  }
+  if (absNum >= 1e3) {
+    return (num / 1e3).toFixed(2) + 'K';
+  }
+
+  return num.toLocaleString('pt-BR', {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2
+  });
+}
 
   // 11. INICIALIZAR GRÁFICO - VERSÃO CORRIGIDA
   async function initChart() {
@@ -3353,32 +3358,22 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // 35. FUNÇÕES AUXILIARES
-  // Função formatCurrency corrigida
-  function formatCurrency(value, compact = false) {
-    if (value === null || value === undefined || isNaN(value)) return 'R$ --';
+  function formatCurrency(num, compact = false) {
+  if (!num && num !== 0) return 'R$ --';
 
-    if (compact) {
-      if (value >= 1000000000000) {
-        return `R$ ${(value / 1000000000000).toFixed(2)}T`;
-      }
-      if (value >= 1000000000) {
-        return `R$ ${(value / 1000000000).toFixed(2)}B`;
-      }
-      if (value >= 1000000) {
-        return `R$ ${(value / 1000000).toFixed(2)}M`;
-      }
-      if (value >= 1000) {
-        return `R$ ${(value / 1000).toFixed(2)}K`;
-      }
-    }
-
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
+  if (compact) {
+    if (num >= 1e12) return `R$ ${(num / 1e12).toFixed(2)}T`;
+    if (num >= 1e9) return `R$ ${(num / 1e9).toFixed(2)}B`;
+    if (num >= 1e6) return `R$ ${(num / 1e6).toFixed(2)}M`;
   }
+
+  return num.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    maximumFractionDigits: 2
+  });
+}
+
 
   // Adicione no final do DOMContentLoaded, antes do initializeApp();
   document.getElementById('refreshCryptoData')?.addEventListener('click', updateCryptoData);
