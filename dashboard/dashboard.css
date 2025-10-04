@@ -7962,3 +7962,80 @@ section {
 section:first-of-type {
     margin-top: 70px !important;
 }
+
+/* Correção para educação no mobile */
+@media (max-width: 768px) {
+    #education-news .card {
+        overflow-x: hidden;
+    }
+    
+    .glossario-grid,
+    .tutoriais-grid {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .tab-content {
+        max-width: 100vw;
+        box-sizing: border-box;
+        padding: 15px 10px;
+    }
+    
+    /* Garantir que o conteúdo não vaze */
+    .glossario-item,
+    .tutorial-item {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Ajustar textos longos */
+    .tab-content p,
+    .tab-content li,
+    .tab-content span {
+        max-width: 100%;
+        word-break: break-word;
+        hyphens: auto;
+    }
+}
+
+/* Adicionar também para as tabs de ferramentas */
+.tools-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tool-tab {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+}
+
+.tool-panel {
+    display: none;
+}
+
+.tool-panel.active {
+    display: block;
+}
+
+/* Garantir que as tabs de calculadora e risco funcionem */
+.calc-tab-content,
+.risk-tab-content {
+    display: none;
+}
+
+.calc-tab-content.active,
+.risk-tab-content.active {
+    display: block;
+}
+
+/* Estilo para tabs ativas */
+.tool-tab.active,
+.calc-tab.active,
+.risk-tab.active {
+    background: var(--primary);
+    color: white;
+}

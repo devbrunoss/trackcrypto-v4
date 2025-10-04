@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Inicializar chat IA
     initChatIA();
 
-    // Configurar abas de ferramentas - LINHA ADICIONADA
-    setupToolsTabs();
+    // CONFIGURAR TODAS AS TABS - LINHA ADICIONADA E CORRIGIDA
+    initAllTabs();
 
     // Iniciar todas as funcionalidades
     await initAllFeatures();
@@ -100,6 +100,105 @@ document.addEventListener('DOMContentLoaded', async function () {
         Notification.requestPermission();
       }, 2000);
     }
+  }
+
+  // CONFIGURAÇÃO DAS TABS DAS FERRAMENTAS - VERSÃO CORRIGIDA
+  function setupToolsTabs() {
+      console.log("Configurando tabs das ferramentas...");
+      
+      const toolTabs = document.querySelectorAll('.tool-tab');
+      const toolPanels = document.querySelectorAll('.tool-panel');
+      
+      console.log(`Encontradas ${toolTabs.length} tabs e ${toolPanels.length} painéis`);
+      
+      if (toolTabs.length === 0 || toolPanels.length === 0) {
+          console.error("Tabs ou painéis não encontrados!");
+          return;
+      }
+
+      toolTabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+              const toolType = this.getAttribute('data-tool');
+              console.log(`Clicou na tab: ${toolType}`);
+              
+              // Remover classe active de todas as tabs
+              toolTabs.forEach(t => t.classList.remove('active'));
+              toolPanels.forEach(p => p.classList.remove('active'));
+              
+              // Adicionar classe active na tab clicada
+              this.classList.add('active');
+              
+              // Mostrar o painel correspondente
+              const targetPanel = document.getElementById(`${toolType}-tool`);
+              if (targetPanel) {
+                  targetPanel.classList.add('active');
+                  console.log(`Painel ${toolType}-tool ativado`);
+              } else {
+                  console.error(`Painel ${toolType}-tool não encontrado!`);
+              }
+          });
+      });
+      
+      // Ativar a primeira tab por padrão
+      if (toolTabs.length > 0) {
+          const firstTab = toolTabs[0];
+          const firstTool = firstTab.getAttribute('data-tool');
+          const firstPanel = document.getElementById(`${firstTool}-tool`);
+          
+          if (firstPanel) {
+              firstTab.classList.add('active');
+              firstPanel.classList.add('active');
+              console.log(`Tab padrão ativada: ${firstTool}`);
+          }
+      }
+  }
+
+  // CONFIGURAÇÃO DAS TABS DA CALCULADORA
+  function setupCalculatorTabs() {
+      const calcTabs = document.querySelectorAll('.calc-tab');
+      const calcContents = document.querySelectorAll('.calc-tab-content');
+      
+      calcTabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+              const tabName = this.getAttribute('data-tab');
+              
+              // Remover classe active de todas as tabs e conteúdos
+              calcTabs.forEach(t => t.classList.remove('active'));
+              calcContents.forEach(c => c.classList.remove('active'));
+              
+              // Adicionar classe active à tab e conteúdo selecionados
+              this.classList.add('active');
+              document.getElementById(`tab-${tabName}`).classList.add('active');
+          });
+      });
+  }
+
+  // CONFIGURAÇÃO DAS TABS DO GERENCIADOR DE RISCO
+  function setupRiskTabs() {
+      const riskTabs = document.querySelectorAll('.risk-tab');
+      const riskContents = document.querySelectorAll('.risk-tab-content');
+      
+      riskTabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+              const tabName = this.getAttribute('data-tab');
+              
+              // Remover classe active de todas as tabs e conteúdos
+              riskTabs.forEach(t => t.classList.remove('active'));
+              riskContents.forEach(c => c.classList.remove('active'));
+              
+              // Adicionar classe active à tab e conteúdo selecionados
+              this.classList.add('active');
+              document.getElementById(`tab-${tabName}`).classList.add('active');
+          });
+      });
+  }
+
+  // INICIALIZAR TODAS AS TABS
+  function initAllTabs() {
+      setupToolsTabs();
+      setupCalculatorTabs();
+      setupRiskTabs();
+      console.log("Todas as tabs inicializadas");
   }
 
   // Adicione esta função para navegação suave
@@ -131,7 +230,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
   }
 
-
   // 5. CHAT IA - VERSÃO OTIMIZADA E CONFIRMADA
   function initChatIA() {
     console.log("Inicializando chat IA...");
@@ -159,7 +257,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Event listeners para abrir/fechar o chat
     chatToggle.addEventListener('click', toggleChatWindow);
     closeChat.addEventListener('click', toggleChatWindow);
-
 
     // Enviar mensagem
     sendMessage.addEventListener('click', handleSendMessage);
@@ -189,7 +286,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }, 300);
       }
     }
-
 
     function handleSendMessage() {
       const message = userInput.value.trim();
@@ -321,7 +417,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // Adicione este CSS para melhorar a aparência do chat (se ainda não tiver)
-  // Você pode adicionar no seu arquivo CSS existente
   const chatStyles = `
 .ai-chat-container {
     position: fixed;
@@ -600,9 +695,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
   }
 
-
-
-
   // 6. TOGGLE MODO AVANÇADO/INICIANTE
   function setupAdvancedModeToggle() {
     const modeToggle = document.getElementById('modeToggle');
@@ -663,7 +755,6 @@ document.addEventListener('DOMContentLoaded', async function () {
       const windowHeight = window.innerHeight;
 
       // Mostrar o botão apenas quando estiver no final da página
-      // (quando a posição de scroll + altura da janela >= altura total do documento - 100px)
       const isAtBottom = (scrollPosition + windowHeight) >= (documentHeight - 100);
 
       if (isAtBottom) {
@@ -826,88 +917,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   }
 
-  // 10. ATUALIZAR DADOS DA CRIPTOMOEDA - VERSÃO CORRIGIDA E MELHORADA
-  async function updateCryptoData() {
-    try {
-      const cryptoId = elements.cryptoSelect.value;
-
-      // Tentar API principal primeiro
-      let data;
-      try {
-        const response = await fetch(`${config.coinGeckoAPI}/coins/${cryptoId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`);
-        if (!response.ok) throw new Error('Erro na API principal');
-        data = await response.json();
-      } catch (primaryError) {
-        console.warn('API principal falhou, tentando fallback:', primaryError);
-
-        // Fallback para API simples
-        const fallbackResponse = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=brl&include_24hr_change=true&include_market_cap=true&include_24hr_vol=true`);
-        if (!fallbackResponse.ok) throw new Error('Fallback também falhou');
-        const fallbackData = await fallbackResponse.json();
-
-        // Formatar dados do fallback para compatibilidade
-        data = {
-          name: cryptoId.charAt(0).toUpperCase() + cryptoId.slice(1),
-          symbol: cryptoId.slice(0, 3).toUpperCase(),
-          market_data: {
-            current_price: { brl: fallbackData[cryptoId].brl },
-            price_change_percentage_24h: fallbackData[cryptoId].brl_24h_change,
-            market_cap: { brl: fallbackData[cryptoId].brl_market_cap },
-            total_volume: { brl: fallbackData[cryptoId].brl_24h_vol },
-            circulating_supply: null // Não disponível na API simples
-          },
-          market_cap_rank: null
-        };
-      }
-
-      // Atualizar UI
-      elements.cryptoName.textContent = `${data.name} (${data.symbol.toUpperCase()})`;
-      elements.price.textContent = formatCurrency(data.market_data.current_price.brl);
-
-      const priceChange = data.market_data.price_change_percentage_24h;
-      const priceChangeElement = document.getElementById('variation');
-
-      // Aplicar cor baseada no valor com estilo neon
-      if (priceChange >= 0) {
-        priceChangeElement.innerHTML = `Variação 24h: <span class="variation-badge positive" style="color: #00ff88; background: rgba(0, 255, 136, 0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">+${priceChange.toFixed(2)}%</span>`;
-      } else {
-        priceChangeElement.innerHTML = `Variação 24h: <span class="variation-badge negative" style="color: #ff3333; background: rgba(255, 51, 51, 0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">${priceChange.toFixed(2)}%</span>`;
-      }
-
-      // Atualizar outras métricas com verificações de segurança
-      elements.rank.textContent = data.market_cap_rank ? `#${data.market_cap_rank}` : '#--';
-      elements.marketCap.textContent = data.market_data.market_cap && data.market_data.market_cap.brl
-        ? formatCurrency(data.market_data.market_cap.brl, true)
-        : 'R$ --';
-
-      elements.volume.textContent = data.market_data.total_volume && data.market_data.total_volume.brl
-        ? formatCurrency(data.market_data.total_volume.brl, true)
-        : 'R$ --';
-
-      const supply = data.market_data.circulating_supply;
-      elements.supply.textContent = supply
-        ? `${formatNumber(supply)} ${data.symbol.toUpperCase()}`
-        : '--';
-
-    } catch (error) {
-      console.error('Erro ao atualizar dados:', error);
-      elements.price.textContent = 'Erro ao carregar';
-      elements.variation.textContent = 'Variação 24h: --';
-
-      // Mostrar erro para o usuário apenas se for a primeira tentativa
-      if (!window.cryptoDataErrorShown) {
-        window.cryptoDataErrorShown = true;
-        Swal.fire({
-          icon: 'error',
-          title: 'Erro de conexão',
-          text: 'Não foi possível obter os dados em tempo real. Verifique sua conexão ou tente novamente em alguns instantes.',
-          timer: 4000
-        });
-      }
-    }
-  }
-
-  // Função para formatar números (adicionar se não existir)
+  // Função para formatar números
   function formatNumber(num) {
   if (!num && num !== 0) return '--';
 
@@ -1199,7 +1209,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     return 'Ganância Extrema';
   }
 
-
   // 16. CARREGAR NOTÍCIAS - VERSÃO SIMPLIFICADA E FUNCIONAL
   async function loadNews() {
     try {
@@ -1241,84 +1250,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }, 5000);
       }
     }
-  }
-
-  // 17. RENDERIZAR NOTÍCIAS - VERSÃO CONFIRMADA
-  function renderNews(newsItems) {
-    if (!elements.newsContainer) {
-      console.error("Container de notícias não encontrado!");
-      return;
-    }
-
-    // Verificar se há notícias
-    if (!newsItems || newsItems.length === 0) {
-      elements.newsContainer.innerHTML = `
-      <div class="news-empty">
-        <i class="fas fa-newspaper"></i>
-        <p>Nenhuma notícia disponível no momento</p>
-      </div>
-    `;
-      return;
-    }
-
-    console.log("Renderizando notícias:", newsItems);
-
-    elements.newsContainer.innerHTML = `
-    <div class="news-grid">
-      ${newsItems.map((item, index) => `
-        <div class="news-item" style="animation-delay: ${index * 0.1}s">
-          <div class="news-image">
-            <img src="${item.thumbnail || 'https://via.placeholder.com/300x150/1a1a2e/00ff88?text=Crypto+News'}" 
-                 alt="${item.title}" 
-                 onerror="this.src='https://via.placeholder.com/300x150/1a1a2e/00ff88?text=Crypto+News'">
-          </div>
-          <div class="news-content">
-            <h3>${item.title && item.title.length > 80 ? item.title.substring(0, 80) + '...' : item.title || 'Sem título'}</h3>
-            <p>${item.description ? (cleanHtml(item.description).substring(0, 120) + '...') : 'Sem descrição disponível.'}</p>
-            <div class="news-footer">
-              <span class="news-source">${item.source || 'Fonte'}</span>
-              <span class="news-date">${formatDate(item.published_at)}</span>
-              <a href="${item.url || '#'}" target="_blank" class="news-link">Ler mais →</a>
-            </div>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-  }
-
-  // Função para limpar HTML das descrições
-  function cleanHtml(text) {
-    return text.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
-  }
-
-  // 17. RENDERIZAR NOTÍCIAS - VERSÃO MELHORADA
-  function renderNews(newsItems) {
-    if (!elements.newsContainer) return;
-
-    // Limitar a 6 notícias
-    const limitedNews = newsItems.slice(0, 6);
-
-    elements.newsContainer.innerHTML = `
-    <div class="news-grid">
-      ${limitedNews.map((item, index) => `
-        <div class="news-item" style="animation-delay: ${index * 0.1}s">
-          <div class="news-image">
-            <img src="${item.thumbnail || 'https://via.placeholder.com/300x150/1a1a2e/00ff88?text=Crypto+News'}" alt="${item.title}">
-          </div>
-          <div class="news-content">
-            <h3>${item.title.length > 80 ? item.title.substring(0, 80) + '...' : item.title}</h3>
-            <p>${item.description ? (item.description.length > 120 ? item.description.substring(0, 120) + '...' : item.description) : 'Sem descrição disponível.'}</p>
-            <div class="news-footer">
-              <span class="news-source">${item.source || 'Fonte'}</span>
-              <span class="news-date">${formatDate(item.published_at || item.pubDate)}</span>
-              <a href="${item.url || item.link}" target="_blank" class="news-link">Ler mais →</a>
-            </div>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
   }
 
   // NOTÍCIAS DE FALLBACK (caso as APIs falhem)
@@ -1421,53 +1352,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   `;
   }
 
-  // FOOTER - COPIA E COLA PIX RSKKKKJ
-  // Função para copiar chave PIX
-  function copyPixKey() {
-    const pixKey = document.getElementById('pixKey').textContent;
-
-    navigator.clipboard.writeText(pixKey).then(() => {
-      // Feedback visual
-      const copyBtn = document.getElementById('copyPixBtn');
-      const originalText = copyBtn.innerHTML;
-
-      copyBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
-      copyBtn.classList.add('copied');
-
-      setTimeout(() => {
-        copyBtn.innerHTML = originalText;
-        copyBtn.classList.remove('copied');
-      }, 2000);
-    }).catch(err => {
-      console.error('Erro ao copiar texto: ', err);
-      Swal.fire('Erro', 'Não foi possível copiar a chave PIX.', 'error');
-    });
-  }
-
-  // Adicionar event listener ao botão
-  document.addEventListener('DOMContentLoaded', function () {
-    const copyBtn = document.getElementById('copyPixBtn');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', copyPixKey);
-    }
-  });
-
-  // BOTÃO MOSTRAR/OCULTAR VOLTAR AO TOPO RS
-  window.addEventListener('scroll', function () {
-    const backToTopButton = document.getElementById('backToTop');
-    if (window.pageYOffset > 300) {
-      backToTopButton.classList.add('show');
-    } else {
-      backToTopButton.classList.remove('show');
-    }
-  });
-
-  // Rolagem suave ao clicar
-  document.getElementById('backToTop').addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // Adicionar esta função ao script.js
+  // Adicione esta função ao script.js
   async function updateMarketIndices() {
     try {
       // Buscar dados de dominância
@@ -1541,9 +1426,6 @@ document.addEventListener('DOMContentLoaded', async function () {
       statusBadge.className = 'status-badge season-btc';
     }
   }
-
-  // Chamar a função quando a página carregar
-  document.addEventListener('DOMContentLoaded', updateMarketIndices);
 
   // 18. ATUALIZAR MÉTRICAS AVANÇADAS - VERSÃO COM FALLBACK
   async function updateAdvancedMetrics() {
@@ -1683,34 +1565,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     updateAltcoinSeason(btcDominance);
   }
 
-  // Função para atualizar o Altcoin Season (já existente)
-  function updateAltcoinSeason(btcDominance) {
-    const altcoinDominance = 100 - btcDominance;
-    const seasonMeter = document.getElementById('seasonIndicator');
-    const seasonStatus = document.getElementById('seasonStatusText');
-    const statusBadge = document.getElementById('seasonStatusBadge');
-
-    if (!seasonMeter || !seasonStatus || !statusBadge) return;
-
-    // Lógica simples para Altcoin Season
-    if (altcoinDominance > 55) {
-      seasonMeter.style.width = '100%';
-      seasonStatus.textContent = 'Altcoin Season Ativo!';
-      statusBadge.innerHTML = '<i class="fas fa-fire"></i> Altcoin Season';
-      statusBadge.className = 'status-badge season-active';
-    } else if (altcoinDominance > 45) {
-      seasonMeter.style.width = '60%';
-      seasonStatus.textContent = 'Mercado Equilibrado';
-      statusBadge.innerHTML = '<i class="fas fa-balance-scale"></i> Equilibrado';
-      statusBadge.className = 'status-badge season-neutral';
-    } else {
-      seasonMeter.style.width = '30%';
-      seasonStatus.textContent = 'Bitcoin Dominante';
-      statusBadge.innerHTML = '<i class="fab fa-bitcoin"></i> BTC Dominante';
-      statusBadge.className = 'status-badge season-btc';
-    }
-  }
-
   // 19. INICIALIZAR FERRAMENTAS AVANÇADAS
   function initAdvancedTools() {
     // Inicializar calculadora de taxas
@@ -1722,14 +1576,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Inicializar gerenciador de risco
     setupRiskManager();
 
-    // Inicializar sistema de alertas
-    // setupPriceAlerts(); // Esta linha está comentada porque já é chamada em outro lugar
-
-    // Inicializar portfólio
-    // setupPortfolio(); // Esta linha está comentada porque já é chamada em outro lugar
-
-    // Configurar abas das ferramentas
-    setupToolsTabs();
+    // Configurar abas das ferramentas - JÁ ESTÁ SENDO CHAMADO EM initAllTabs()
   }
 
   // 20. CALCULADORA DE TAXAS
@@ -1741,7 +1588,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // 21. CALCULAR TAXAS
-  // Substituir a função calculateFees existente por esta:
   function calculateFees() {
     const amount = parseFloat(document.getElementById('feeAmount').value);
     const exchange = document.getElementById('feeExchange').value;
@@ -1776,32 +1622,13 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // 22. CALCULADORA DE TRADE
-  // Adicionar estas funções ao script.js
-
-  // Calculadora de Trade
   function setupTradeCalculator() {
     const calculateBtn = document.getElementById('calcCalculate');
     if (calculateBtn) {
       calculateBtn.addEventListener('click', calculateTrade);
     }
 
-    // Configurar abas
-    const tabs = document.querySelectorAll('.calc-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', function () {
-        const tabName = this.dataset.tab;
-
-        // Remover classe active de todas as abas
-        tabs.forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.calc-tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-
-        // Adicionar classe active à aba clicada
-        this.classList.add('active');
-        document.getElementById(`tab-${tabName}`).classList.add('active');
-      });
-    });
+    // Configurar abas - JÁ ESTÁ SENDO CHAMADO EM setupCalculatorTabs()
   }
 
   function calculateTrade() {
@@ -1884,23 +1711,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       });
     }
 
-    // Configurar abas
-    const tabs = document.querySelectorAll('.risk-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', function () {
-        const tabName = this.dataset.tab;
-
-        // Remover classe active de todas as abas
-        tabs.forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.risk-tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-
-        // Adicionar classe active à aba clicada
-        this.classList.add('active');
-        document.getElementById(`tab-${tabName}`).classList.add('active');
-      });
-    });
+    // Configurar abas - JÁ ESTÁ SENDO CHAMADO EM setupRiskTabs()
   }
 
   function calculateRisk() {
@@ -1971,15 +1782,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('riskResult').style.display = 'block';
   }
 
-  // Inicializar as calculadoras
-  document.addEventListener('DOMContentLoaded', function () {
-    setupTradeCalculator();
-    setupRiskManager();
-  });
-
-
   // EDUCAÇÃO CRIPTO
-  // EDUCAÇÃO CRIPTO - Adicione este código ao script.js
   const cryptoGlossary = [
     { term: "Blockchain", definition: "Tecnologia de registro distribuído que forma a base para criptomoedas." },
     { term: "Bitcoin", definition: "A primeira e mais valiosa criptomoeda, criada por Satoshi Nakamoto." },
@@ -1996,8 +1799,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     { term: "Mining", definition: "Processo de validar transações e adicionar novos blocos à blockchain." }
   ];
 
-  // Dados dos tutoriais
-  // Substitua a array cryptoTutorials por:
   const cryptoTutorials = [
     {
       title: "Como Comprar Sua Primeira Criptomoeda",
@@ -2013,7 +1814,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     },
     {
       title: "Guia de Staking para Iniciantes",
-      content: "Staking permite ganhar rendimentos passivos: 1) Escolha moedas que suportam staking (ETH, ADA, SOL); 2) Transfira para uma exchange ou carteira que ofereça staking; 3) 'Bloqueie' suas moedas pelo período desejado; 4) Receba recompensas regularmente. Cuidado: Períodos de lock podem variar, e o valor das moedas pode flutuar.",
+      content: "Staking permite ganhar rendimentos passivos: 1) Escolha moedas que suportem staking (ETH, ADA, SOL); 2) Transfira para uma exchange ou carteira que ofereça staking; 3) 'Bloqueie' suas moedas pelo período desejado; 4) Receba recompensas regularmente. Cuidado: Períodos de lock podem variar, e o valor das moedas pode flutuar.",
       difficulty: "Intermediário",
       duration: "12 min"
     },
@@ -2133,358 +1934,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   }
 
-  // Adicione esta chamada na função initializeApp()
-  // initEducationSection();
-
-  // 23. Calculadora de Trade e Gerenciador de Risco
-
-  // Calculadora de Trade
-  function setupTradeCalculator() {
-    const calculateBtn = document.getElementById('calcCalculate');
-    if (calculateBtn) {
-      calculateBtn.addEventListener('click', calculateTrade);
-    }
-
-    // Configurar abas
-    const tabs = document.querySelectorAll('.calc-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', function () {
-        const tabName = this.dataset.tab;
-
-        // Remover classe active de todas as abas
-        tabs.forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.calc-tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-
-        // Adicionar classe active à aba clicada
-        this.classList.add('active');
-        document.getElementById(`tab-${tabName}`).classList.add('active');
-      });
-    });
-  }
-
-  function calculateTrade() {
-    const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
-    const buyPrice = parseFloat(document.getElementById('calcBuyPrice').value) || 0;
-    const sellPrice = parseFloat(document.getElementById('calcSellPrice').value) || 0;
-
-    if (!amount || !buyPrice) {
-      Swal.fire('Erro', 'Por favor, preencha pelo menos a quantidade e o preço de compra.', 'error');
-      return;
-    }
-
-    const investment = amount * buyPrice;
-    const finalValue = amount * (sellPrice || buyPrice);
-    const profit = finalValue - investment;
-    const profitPercentage = (profit / investment) * 100;
-
-    // Calcular taxas se estiver na aba de taxas
-    let fees = 0;
-    if (document.getElementById('tab-fees').classList.contains('active')) {
-      const buyFee = parseFloat(document.getElementById('calcBuyFee').value) || 0;
-      const sellFee = parseFloat(document.getElementById('calcSellFee').value) || 0;
-      const withdrawalFee = parseFloat(document.getElementById('calcWithdrawalFee').value) || 0;
-
-      fees = (investment * (buyFee / 100)) + (finalValue * (sellFee / 100)) + withdrawalFee;
-    }
-
-    const netProfit = profit - fees;
-    const netPercentage = (netProfit / investment) * 100;
-
-    // Atualizar UI com resultados
-    document.getElementById('resultInvestment').textContent = `R$ ${investment.toFixed(2)}`;
-    document.getElementById('resultFinalValue').textContent = `R$ ${finalValue.toFixed(2)}`;
-    document.getElementById('resultProfit').textContent = `R$ ${netProfit.toFixed(2)}`;
-    document.getElementById('resultPercentage').textContent = `${netProfit >= 0 ? '+' : ''}${netPercentage.toFixed(2)}%`;
-    document.getElementById('resultFees').textContent = `R$ ${fees.toFixed(2)}`;
-
-    // Calcular risco/retorno se stop loss estiver definido
-    const stopLoss = parseFloat(document.getElementById('calcStopLoss').value);
-    if (stopLoss && stopLoss > 0) {
-      const risk = investment - (amount * stopLoss);
-      const reward = netProfit;
-      const riskReward = risk > 0 ? (reward / risk).toFixed(2) : '∞';
-      document.getElementById('resultRiskReward').textContent = `1:${riskReward}`;
-    }
-
-    // Aplicar classes de estilo
-    const profitElement = document.getElementById('resultProfit');
-    const percentageElement = document.getElementById('resultPercentage');
-    const badgeElement = document.getElementById('resultBadge');
-
-    if (netProfit >= 0) {
-      profitElement.className = 'value-profit';
-      percentageElement.className = 'value-profit';
-      badgeElement.textContent = 'LUCRO';
-      badgeElement.className = 'badge-profit';
-    } else {
-      profitElement.className = 'value-loss';
-      percentageElement.className = 'value-loss';
-      badgeElement.textContent = 'PREJUÍZO';
-      badgeElement.className = 'badge-loss';
-    }
-
-    // Mostrar resultados
-    document.getElementById('calcResult').style.display = 'block';
-  }
-
-  // Gerenciador de Risco
-  function setupRiskManager() {
-    const calculateBtn = document.getElementById('calculateRisk');
-    if (calculateBtn) {
-      calculateBtn.addEventListener('click', calculateRisk);
-    }
-
-    // Configurar slider
-    const riskSlider = document.getElementById('riskPerTrade');
-    if (riskSlider) {
-      riskSlider.addEventListener('input', function () {
-        document.getElementById('riskValue').textContent = `${this.value}%`;
-      });
-    }
-
-    // Configurar abas
-    const tabs = document.querySelectorAll('.risk-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', function () {
-        const tabName = this.dataset.tab;
-
-        // Remover classe active de todas as abas
-        tabs.forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.risk-tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-
-        // Adicionar classe active à aba clicada
-        this.classList.add('active');
-        document.getElementById(`tab-${tabName}`).classList.add('active');
-      });
-    });
-  }
-
-  function calculateRisk() {
-    const capital = parseFloat(document.getElementById('totalCapital').value) || 0;
-    const riskPercent = parseFloat(document.getElementById('riskPerTrade').value) || 2;
-    const stopLossPercent = parseFloat(document.getElementById('stopLossPercent').value) || 15;
-
-    if (!capital || capital <= 0) {
-      Swal.fire('Erro', 'Por favor, insira um valor válido para o capital.', 'error');
-      return;
-    }
-
-    const riskAmount = capital * (riskPercent / 100);
-    const positionSize = riskAmount / (stopLossPercent / 100);
-
-    // Atualizar UI com resultados
-    document.getElementById('riskValuePerTrade').textContent = `R$ ${riskAmount.toFixed(2)}`;
-    document.getElementById('riskMaxLoss').textContent = `R$ ${riskAmount.toFixed(2)}`;
-    document.getElementById('riskPositionSize').textContent = positionSize.toFixed(2);
-
-    // Calcular score de risco (simulação)
-    let riskScore = 100 - (riskPercent * 5);
-    if (riskPercent > 5) riskScore -= 20;
-    if (stopLossPercent < 10) riskScore -= 15;
-
-    riskScore = Math.max(0, Math.min(100, riskScore));
-    document.getElementById('riskScore').textContent = `${riskScore}/100`;
-
-    // Definir nível de risco
-    let riskLevel = 'MODERADO';
-    let riskClass = 'risk-moderate';
-
-    if (riskScore >= 80) {
-      riskLevel = 'BAIXO';
-      riskClass = 'risk-low';
-    } else if (riskScore >= 60) {
-      riskLevel = 'MODERADO';
-      riskClass = 'risk-moderate';
-    } else if (riskScore >= 40) {
-      riskLevel = 'ALTO';
-      riskClass = 'risk-high';
-    } else {
-      riskLevel = 'MUITO ALTO';
-      riskClass = 'risk-very-high';
-    }
-
-    document.getElementById('riskLevel').textContent = riskLevel;
-    document.getElementById('riskLevel').className = `risk-badge ${riskClass}`;
-
-    // Gerar recomendações
-    const recommendations = [
-      riskPercent > 5 ? 'Considere reduzir o risco por trade para abaixo de 5%' : 'Risco por trade em nível adequado',
-      stopLossPercent < 10 ? 'Aumente o stop loss para pelo menos 10%' : 'Stop loss em nível adequado',
-      'Sempre use ordens stop-loss para gerenciar riscos',
-      'Diversifique entre diferentes criptomoedas'
-    ];
-
-    const recommendationsHTML = recommendations.map(rec => `
-        <div class="recommendation-item">
-            <i class="fas fa-check-circle"></i>
-            <span>${rec}</span>
-        </div>
-    `).join('');
-
-    document.getElementById('riskRecommendations').innerHTML = recommendationsHTML;
-
-    // Mostrar resultados
-    document.getElementById('riskResult').style.display = 'block';
-  }
-
-  // 23. CALCULAR TRADE
-  function calculateTrade() {
-    const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
-    const buyPrice = parseFloat(document.getElementById('calcBuyPrice').value) || 0;
-    const sellPrice = parseFloat(document.getElementById('calcSellPrice').value) || 0;
-
-    if (!amount || !buyPrice) {
-      alert('Por favor, preencha pelo menos a quantidade e o preço de compra.');
-      return;
-    }
-
-    const investment = amount * buyPrice;
-    const finalValue = amount * (sellPrice || buyPrice);
-    const profit = finalValue - investment;
-    const profitPercentage = (profit / investment) * 100;
-
-    // Atualizar UI com resultados
-    document.getElementById('resultInvestment').textContent = formatCurrency(investment);
-    document.getElementById('resultFinalValue').textContent = formatCurrency(finalValue);
-    document.getElementById('resultProfit').textContent = formatCurrency(profit);
-    document.getElementById('resultPercentage').textContent = `${profit >= 0 ? '+' : ''}${profitPercentage.toFixed(2)}%`;
-
-    // Aplicar classes de estilo baseadas no resultado
-    const profitElement = document.getElementById('resultProfit');
-    const percentageElement = document.getElementById('resultPercentage');
-    const badgeElement = document.getElementById('resultBadge');
-
-    if (profit >= 0) {
-      profitElement.className = 'positive';
-      percentageElement.className = 'positive';
-      badgeElement.textContent = 'LUCRO';
-      badgeElement.className = 'badge-profit';
-    } else {
-      profitElement.className = 'negative';
-      percentageElement.className = 'negative';
-      badgeElement.textContent = 'PREJUÍZO';
-      badgeElement.className = 'badge-loss';
-    }
-
-    // Mostrar resultados
-    document.getElementById('calcResult').style.display = 'block';
-  }
-
-
-  // 24. GERENCIADOR DE RISCO
-  function setupRiskManager() {
-    const calculateBtn = document.getElementById('calculateRisk');
-    if (calculateBtn) {
-      calculateBtn.addEventListener('click', calculateRisk);
-    }
-
-    // Configurar slider
-    const riskSlider = document.getElementById('riskPerTrade');
-    if (riskSlider) {
-      riskSlider.addEventListener('input', function () {
-        document.getElementById('riskValue').textContent = `${this.value}%`;
-      });
-    }
-
-    // Configurar abas
-    const tabs = document.querySelectorAll('.risk-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabName = tab.dataset.tab;
-
-        // Remover classe active de todas as abas e conteúdos
-        tabs.forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.risk-tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-
-        // Adicionar classe active à aba e conteúdo selecionados
-        tab.classList.add('active');
-        document.getElementById(`tab-${tabName}`).classList.add('active');
-      });
-    });
-  }
-
-  // 25. CALCULAR RISCO
-  function calculateRisk() {
-    const capital = parseFloat(document.getElementById('totalCapital').value) || 0;
-    const riskPercent = parseFloat(document.getElementById('riskPerTrade').value) || 2;
-
-    if (!capital || capital <= 0) {
-      alert('Por favor, insira um valor válido para o capital.');
-      return;
-    }
-
-    const riskAmount = capital * (riskPercent / 100);
-
-    // Atualizar UI com resultados
-    document.getElementById('riskValuePerTrade').textContent = formatCurrency(riskAmount);
-    document.getElementById('riskMaxLoss').textContent = formatCurrency(riskAmount);
-
-    // Calcular position size (simulação)
-    const coinPrice = 250000; // Preço simulado do Bitcoin
-    const positionSize = riskAmount / coinPrice;
-
-    document.getElementById('riskPositionSize').textContent = positionSize.toFixed(6) + ' BTC';
-
-    // Calcular preço de stop loss (simulação)
-    const stopLossPercent = parseFloat(document.getElementById('stopLossPercent').value) || 15;
-    const stopPrice = coinPrice * (1 - stopLossPercent / 100);
-
-    document.getElementById('riskStopPrice').textContent = formatCurrency(stopPrice);
-
-    // Calcular score de risco (simulação)
-    const riskScore = Math.max(0, Math.min(100, 100 - (riskPercent * 5) + 30));
-    document.getElementById('riskScore').textContent = `${Math.round(riskScore)}/100`;
-
-    // Definir nível de risco
-    let riskLevel = 'MODERADO';
-    let riskClass = 'risk-moderate';
-
-    if (riskScore >= 80) {
-      riskLevel = 'BAIXO';
-      riskClass = 'risk-low';
-    } else if (riskScore >= 60) {
-      riskLevel = 'MODERADO';
-      riskClass = 'risk-moderate';
-    } else if (riskScore >= 40) {
-      riskLevel = 'ALTO';
-      riskClass = 'risk-high';
-    } else {
-      riskLevel = 'MUITO ALTO';
-      riskClass = 'risk-very-high';
-    }
-
-    document.getElementById('riskLevel').textContent = riskLevel;
-    document.getElementById('riskLevel').className = `risk-badge ${riskClass}`;
-
-    // Gerar recomendações
-    const recommendations = [
-      'Mantenha o risco por trade abaixo de 2% do capital total',
-      'Use stop-loss para limitar perdas',
-      'Diversifique entre diferentes criptomoedas',
-      riskPercent > 5 ? 'Considere reduzir o risco por trade' : 'Nível de risco adequado'
-    ];
-
-    const recommendationsHTML = recommendations.map(rec => `
-      <div class="recommendation-item">
-        <i class="fas fa-check-circle"></i>
-        <span>${rec}</span>
-      </div>
-    `).join('');
-
-    document.getElementById('riskRecommendations').innerHTML = recommendationsHTML;
-
-    // Mostrar resultados
-    document.getElementById('riskResult').style.display = 'block';
-  }
-
-  // 26. SISTEMA DE ALERTAS
-  // Adicione esta classe ao script.js
+  // SISTEMA DE ALERTAS
   class PriceAlerts {
     constructor() {
       this.alerts = JSON.parse(localStorage.getItem('priceAlerts')) || [];
@@ -2759,115 +2209,11 @@ document.addEventListener('DOMContentLoaded', async function () {
   // Inicializar o sistema de alertas
   let priceAlerts;
 
-  // Adicione esta função para inicializar os alertas
   function initPriceAlerts() {
     priceAlerts = new PriceAlerts();
   }
 
-  // Adicione esta chamada na função initializeApp()
-  // initPriceAlerts();
-
-  // 27. MOSTRAR DIÁLOGO DE ADICIONAR ALERTA
-  function showAddAlertDialog() {
-    Swal.fire({
-      title: 'Criar Alerta de Preço',
-      html: `
-        <input type="text" id="swal-alert-coin" class="swal2-input" placeholder="Criptomoeda (ex: Bitcoin)">
-        <select id="swal-alert-condition" class="swal2-input">
-          <option value="above">Acima de</option>
-          <option value="below">Abaixo de</option>
-        </select>
-        <input type="number" id="swal-alert-price" class="swal2-input" placeholder="Preço (R$)">
-      `,
-      focusConfirm: false,
-      showCancelButton: true,
-      confirmButtonText: 'Criar Alerta',
-      preConfirm: () => {
-        const coin = document.getElementById('swal-alert-coin').value;
-        const condition = document.getElementById('swal-alert-condition').value;
-        const price = document.getElementById('swal-alert-price').value;
-
-        if (!coin || !price) {
-          Swal.showValidationMessage('Por favor, preencha todos os campos');
-          return false;
-        }
-
-        return { coin, condition, price: parseFloat(price) };
-      }
-    }).then(result => {
-      if (result.isConfirmed) {
-        addAlert(result.value);
-      }
-    });
-  }
-
-  // 28. ADICIONAR ALERTA
-  function addAlert(alert) {
-    // Recuperar alertas existentes
-    const alerts = JSON.parse(localStorage.getItem('priceAlerts')) || [];
-
-    // Adicionar novo alerta
-    alerts.push({
-      id: Date.now(),
-      ...alert,
-      active: true,
-      createdAt: new Date().toISOString()
-    });
-
-    // Salvar no localStorage
-    localStorage.setItem('priceAlerts', JSON.stringify(alerts));
-
-    // Atualizar UI
-    updateAlertsUI();
-
-    Swal.fire('Sucesso!', 'Alerta criado com sucesso.', 'success');
-  }
-
-  // 29. ATUALIZAR UI DE ALERTAS
-  function updateAlertsUI() {
-    const alerts = JSON.parse(localStorage.getItem('priceAlerts')) || [];
-    const container = document.getElementById('alertsContainer');
-    const emptyState = document.getElementById('alertsEmpty');
-
-    if (alerts.length === 0) {
-      if (emptyState) emptyState.style.display = 'block';
-      if (container) container.innerHTML = '';
-      return;
-    }
-
-    if (emptyState) emptyState.style.display = 'none';
-
-    // Gerar HTML dos alertas
-    container.innerHTML = alerts.map(alert => `
-      <div class="alert-item">
-        <div class="alert-header">
-          <span class="alert-coin">${alert.coin}</span>
-          <span class="alert-status ${alert.active ? 'active' : 'inactive'}">
-            ${alert.active ? 'Ativo' : 'Inativo'}
-          </span>
-        </div>
-        <div class="alert-condition">
-          ${alert.condition === 'above' ? 'Acima de' : 'Abaixo de'} R$ ${alert.price.toFixed(2)}
-        </div>
-        <div class="alert-actions">
-          <button class="btn-icon" onclick="toggleAlert(${alert.id})">
-            <i class="fas ${alert.active ? 'fa-pause' : 'fa-play'}"></i>
-          </button>
-          <button class="btn-icon" onclick="deleteAlert(${alert.id})">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-    `).join('');
-
-    // Atualizar contador
-    const activeAlerts = alerts.filter(a => a.active).length;
-    document.getElementById('alertsCount').textContent = activeAlerts;
-  }
-
-  // 30. PORTFÓLIO
-  // Adicionar esta classe ao script.js
-  // Adicione esta classe ao script.js
+  // PORTFÓLIO
   class PortfolioManager {
     constructor() {
       this.assets = JSON.parse(localStorage.getItem('portfolio')) || [];
@@ -3108,202 +2454,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   // Inicializar o gerenciador de portfólio
   let portfolioManager;
 
-  // Adicione esta função para inicializar o portfolioManager
   function initPortfolioManager() {
     portfolioManager = new PortfolioManager();
-  }
-
-  // Modifique a função initializeApp() para incluir a inicialização do portfolioManager
-  // Procure pela função initializeApp() no seu código e adicione esta linha:
-  // initPortfolioManager();
-
-  // 31. MOSTRAR DIÁLOGO DE ADICIONAR ATIVO
-  function showAddAssetDialog() {
-    Swal.fire({
-      title: 'Adicionar Ativo ao Portfólio',
-      html: `
-        <input type="text" id="swal-asset-name" class="swal2-input" placeholder="Nome do ativo (ex: Bitcoin)">
-        <input type="number" id="swal-asset-amount" class="swal2-input" placeholder="Quantidade">
-        <input type="number" id="swal-asset-price" class="swal2-input" placeholder="Preço de compra (R$)">
-      `,
-      focusConfirm: false,
-      showCancelButton: true,
-      confirmButtonText: 'Adicionar',
-      preConfirm: () => {
-        const name = document.getElementById('swal-asset-name').value;
-        const amount = document.getElementById('swal-asset-amount').value;
-        const price = document.getElementById('swal-asset-price').value;
-
-        if (!name || !amount || !price) {
-          Swal.showValidationMessage('Por favor, preencha todos os campos');
-          return false;
-        }
-
-        return { name, amount: parseFloat(amount), price: parseFloat(price) };
-      }
-    }).then(result => {
-      if (result.isConfirmed) {
-        addAssetToPortfolio(result.value);
-      }
-    });
-  }
-
-  // 32. ADICIONAR ATIVO AO PORTFÓLIO
-  function addAssetToPortfolio(asset) {
-    // Recuperar portfólio existente
-    const portfolio = JSON.parse(localStorage.getItem('portfolio')) || [];
-
-    // Adicionar novo ativo
-    portfolio.push({
-      id: Date.now(),
-      ...asset,
-      addedAt: new Date().toISOString()
-    });
-
-    // Salvar no localStorage
-    localStorage.setItem('portfolio', JSON.stringify(portfolio));
-
-    // Atualizar UI
-    updatePortfolioUI();
-
-    Swal.fire('Sucesso!', 'Ativo adicionado ao portfólio.', 'success');
-  }
-
-  // 33. ATUALIZAR UI DO PORTFÓLIO
-  function updatePortfolioUI() {
-    const portfolio = JSON.parse(localStorage.getItem('portfolio')) || [];
-    const container = document.getElementById('portfolioAssets');
-    const emptyState = document.getElementById('portfolioEmpty');
-
-    if (portfolio.length === 0) {
-      if (emptyState) emptyState.style.display = 'block';
-      if (container) container.innerHTML = '';
-      return;
-    }
-
-    if (emptyState) emptyState.style.display = 'none';
-
-    // Calcular totais
-    let totalInvested = 0;
-    let totalCurrent = 0;
-
-    // Gerar HTML da tabela
-    container.innerHTML = portfolio.map(asset => {
-      const invested = asset.amount * asset.price;
-      // Simular valor atual (em produção, buscaría preço real)
-      const currentPrice = asset.price * (1 + (Math.random() * 0.5 - 0.2)); // ±25%
-      const currentValue = asset.amount * currentPrice;
-      const profit = currentValue - invested;
-      const profitPercent = (profit / invested) * 100;
-
-      totalInvested += invested;
-      totalCurrent += currentValue;
-
-      return `
-        <tr>
-          <td>${asset.name}</td>
-          <td>${asset.amount.toFixed(6)}</td>
-          <td>${formatCurrency(asset.price)}</td>
-          <td>${formatCurrency(invested)}</td>
-          <td>${formatCurrency(currentPrice)}</td>
-          <td>${formatCurrency(currentValue)}</td>
-          <td class="${profit >= 0 ? 'positive' : 'negative'}">${formatCurrency(profit)}</td>
-          <td class="${profit >= 0 ? 'positive' : 'negative'}">${profitPercent >= 0 ? '+' : ''}${profitPercent.toFixed(2)}%</td>
-          <td>
-            <button class="btn-icon" onclick="removeAsset(${asset.id})">
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      `;
-    }).join('');
-
-    // Atualizar totais
-    const totalProfit = totalCurrent - totalInvested;
-    const totalProfitPercent = (totalProfit / totalInvested) * 100;
-
-    document.getElementById('portfolioTotalInvested').textContent = formatCurrency(totalInvested);
-    document.getElementById('portfolioTotalCurrent').textContent = formatCurrency(totalCurrent);
-    document.getElementById('portfolioTotalProfit').textContent = formatCurrency(totalProfit);
-    document.getElementById('portfolioTotalProfitPercent').textContent = `${totalProfitPercent >= 0 ? '+' : ''}${totalProfitPercent.toFixed(2)}%`;
-
-    // Aplicar estilos aos totais
-    const profitElement = document.getElementById('portfolioTotalProfit');
-    const percentElement = document.getElementById('portfolioTotalProfitPercent');
-
-    if (totalProfit >= 0) {
-      profitElement.className = 'positive';
-      percentElement.className = 'positive';
-    } else {
-      profitElement.className = 'negative';
-      percentElement.className = 'negative';
-    }
-  }
-
-  // Adicione esta função para controlar as abas da seção educativa
-  function setupEducationTabs() {
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    if (tabButtons.length === 0 || tabContents.length === 0) return;
-
-    tabButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        const tabName = this.textContent.toLowerCase();
-
-        // Remover classe active de todos os botões e conteúdos
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabContents.forEach(content => content.style.display = 'none');
-
-        // Adicionar classe active ao botão clicado
-        this.classList.add('active');
-
-        // Mostrar o conteúdo correspondente
-        if (tabName.includes('glossário') || tabName.includes('glossario')) {
-          document.getElementById('glossario').style.display = 'block';
-          loadGlossary();
-        } else if (tabName.includes('tutoriais')) {
-          document.getElementById('tutoriais').style.display = 'block';
-          loadTutorials();
-        }
-      });
-    });
-  }
-
-  // Modifique a função initEducationSection() para incluir a configuração das abas:
-  function initEducationSection() {
-    loadGlossary();
-    loadTutorials();
-    setupEducationTabs(); // ← Adicione esta linha
-
-    // Ativar a primeira aba por padrão
-    const firstTab = document.querySelector('.tab-btn');
-    if (firstTab) {
-      firstTab.classList.add('active');
-      document.getElementById('glossario').style.display = 'block';
-    }
-  }
-
-  // Adicione esta função para controlar as abas de ferramentas
-  function setupToolsTabs() {
-    const toolTabs = document.querySelectorAll('.tool-tab');
-    const toolPanels = document.querySelectorAll('.tool-panel');
-
-    if (toolTabs.length === 0 || toolPanels.length === 0) return;
-
-    toolTabs.forEach(tab => {
-      tab.addEventListener('click', function () {
-        const tool = this.dataset.tool;
-
-        // Remover classe active de todas as abas e painéis
-        toolTabs.forEach(t => t.classList.remove('active'));
-        toolPanels.forEach(p => p.classList.remove('active'));
-
-        // Adicionar classe active à aba e painel selecionados
-        this.classList.add('active');
-        document.getElementById(`${tool}-tool`).classList.add('active');
-      });
-    });
   }
 
   // 34. INICIALIZAR TODAS AS FUNCIONALIDADES - VERSÃO CORRIGIDA
@@ -3325,7 +2477,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
 
       try {
-        await updateFearGreed(); // ← Esta linha já deve estar aqui
+        await updateFearGreed();
       } catch (error) {
         console.error("Erro em updateFearGreed:", error);
       }
@@ -3343,7 +2495,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error("Erro em setupChartControls:", error);
       }
 
-      // Inicializar métricas avançadas - ← ADICIONE ESTA LINHA
+      // Inicializar métricas avançadas
       try {
         await updateAdvancedMetrics();
       } catch (error) {
@@ -3373,7 +2525,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     maximumFractionDigits: 2
   });
 }
-
 
   // Adicione no final do DOMContentLoaded, antes do initializeApp();
   document.getElementById('refreshCryptoData')?.addEventListener('click', updateCryptoData);
