@@ -8039,3 +8039,119 @@ section:first-of-type {
     background: var(--primary);
     color: white;
 }
+
+/* ESTILOS PARA AS TABS - ADICIONE AO SEU CSS */
+.tools-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tool-tab {
+    padding: 12px 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.tool-tab:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary);
+}
+
+.tool-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.tool-panel {
+    display: none;
+}
+
+.tool-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Tabs da calculadora */
+.calculator-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.calc-tab {
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calc-tab:hover {
+    color: var(--text-primary);
+}
+
+.calc-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.calc-tab-content {
+    display: none;
+}
+
+.calc-tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Tabs de risco */
+.risk-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.risk-tab {
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.risk-tab:hover {
+    color: var(--text-primary);
+}
+
+.risk-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.risk-tab-content {
+    display: none;
+}
+
+.risk-tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

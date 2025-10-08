@@ -243,10 +243,12 @@ h1, h2, h3 {
 }
 
 .dashboard-title span {
-  background: var(--accent-gradient);
+  background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* linha importante */
   background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: transparent; /* fallback */
+  font-weight: 700;
 }
 
 .crypto-list {
