@@ -1,0 +1,254 @@
+/* ============================================================
+   dashboard-v2.css
+   Camada de redesign — carregada DEPOIS de dashboard.css, então
+   sobrescreve por cima sem precisar reescrever o arquivo antigo.
+   ============================================================ */
+
+/* ---------- 1. TOKENS REFINADOS ---------- */
+:root {
+  --bg: #0a0e0c;
+  --card: #121815;
+  --card-2: #182420;
+  --primary: #00ff88;
+  --primary-dark: #00cc6a;
+  --primary-muted: #0a3d28;
+  --text: #eef2f0;
+  --text-muted: #8a938f;
+  --error: #ff4d5e;
+  --border-soft: rgba(0, 255, 136, 0.14);
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --sidebar-w: 232px;
+}
+
+:root[data-theme="light"] {
+  --bg: #f3f6f4;
+  --card: #ffffff;
+  --card-2: #eef5f1;
+  --text: #16211c;
+  --text-muted: #5b6b63;
+  --border-soft: rgba(0, 165, 90, 0.16);
+}
+
+/* Números e valores monetários em monoespaçada — assinatura visual */
+.price, .stat-value, .metric-card h3, #variation, .result-value,
+.current-value, .detail-row span:last-child, .calc-hint,
+.chart-stat .stat-value, .ticker-item {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 2. LAYOUT: SHELL + SIDEBAR ---------- */
+.dashboard-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--card);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  z-index: 500;
+}
+
+.sidebar-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 0 8px 24px;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 20px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-link i {
+  width: 18px;
+  text-align: center;
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+
+.sidebar-link:hover {
+  background: var(--card-2);
+  color: var(--text);
+}
+
+.sidebar-link.active {
+  background: var(--primary-muted);
+  color: var(--primary);
+}
+
+.sidebar-link.active i {
+  color: var(--primary);
+}
+
+.sidebar-footer {
+  border-top: 1px solid var(--border-soft);
+  padding-top: 16px;
+}
+
+.sidebar-theme {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.sidebar-theme .switch {
+  margin-left: auto;
+}
+
+/* Conteúdo principal ocupa o espaço ao lado da sidebar */
+.dashboard-container {
+  margin-left: var(--sidebar-w) !important;
+  width: calc(100% - var(--sidebar-w)) !important;
+  max-width: calc(100% - var(--sidebar-w)) !important;
+  padding: 20px 28px 40px !important;
+}
+
+/* ---------- 3. TICKER (assinatura visual) ---------- */
+.market-ticker {
+  margin-left: var(--sidebar-w);
+  overflow: hidden;
+  background: var(--card);
+  border-bottom: 1px solid var(--border-soft);
+  white-space: nowrap;
+  position: relative;
+}
+
+.market-ticker-track {
+  display: inline-flex;
+  gap: 32px;
+  padding: 10px 24px;
+  animation: ticker-scroll 28s linear infinite;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.ticker-dot {
+  font-size: 0.4rem;
+  color: var(--primary);
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.ticker-up { color: var(--primary); }
+.ticker-down { color: var(--error); }
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .market-ticker-track { animation: none; }
+}
+
+/* ---------- 4. TABS (mercado / ferramentas / aprender) ---------- */
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ---------- 5. REFINO DE CARDS E COMPONENTES ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+}
+
+.metric-card, .result-card {
+  background: var(--card-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+}
+
+.btn, .btn-primary {
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.form-input, .calc-input, .risk-input {
+  border-radius: 6px;
+  border: 1px solid var(--border-soft);
+  background: var(--card-2);
+}
+
+/* Cabeçalho antigo vira só uma barra fina no topo do conteúdo, já que
+   a navegação principal agora mora na sidebar */
+header#pageHeader {
+  margin-left: var(--sidebar-w) !important;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+header#pageHeader .logo {
+  display: none;
+}
+
+/* ---------- 6. RESPONSIVO — abaixo de 900px vira mobile com drawer ---------- */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+
+  .dashboard-container {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px 16px 32px !important;
+  }
+
+  .market-ticker { margin-left: 0; }
+
+  header#pageHeader {
+    margin-left: 0 !important;
+  }
+
+  header#pageHeader .logo {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 901px) {
+  .menu-toggle {
+    display: none !important;
+  }
+
+  .mobile-nav, .nav-overlay {
+    display: none !important;
+  }
+}
